@@ -10,7 +10,7 @@ class Vehiculo extends Model
 {
     protected $fillable = ['placa', 'marca', 'modelo','user_id'];
 
-  // Esta relación debe ir aquí, NO en la migración
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

@@ -64,7 +64,7 @@ class UserController extends Controller
             return response()->json(['message' => 'Usuario no encontrado'], 404);
         }
 
-        // 1️⃣ Validar los datos actualizados
+        //  Validar los datos actualizados
         $request->validate([
             'name' => 'sometimes|string|max:255',
             'email' => 'sometimes|email|unique:users,email,' . $user->id,
@@ -72,10 +72,10 @@ class UserController extends Controller
             'role_id' => 'nullable|integer|exists:roles,id',
         ]);
 
-        // 2️⃣ Actualizar usuario
+        //  Actualizar usuario
         $user->update($request->only(['name', 'email', 'vehiculo_id', 'role_id']));
 
-        // 3️⃣ Sincronizar relación con el vehículo
+        //  Sincronizar relación con el vehículo
         if ($request->vehiculo_id) {
             $vehiculo = Vehiculo::find($request->vehiculo_id);
             if ($vehiculo) {
@@ -94,7 +94,7 @@ class UserController extends Controller
             return response()->json(['message' => 'Usuario no encontrado'], 404);
         }
 
-        // 1️⃣ Desvincular el vehículo antes de eliminar el usuario
+        //  Desvincular el vehículo antes de eliminar el usuario
         if ($user->vehiculo_id) {
             $vehiculo = Vehiculo::find($user->vehiculo_id);
             if ($vehiculo) {
@@ -103,7 +103,7 @@ class UserController extends Controller
             }
         }
 
-        // 2️⃣ Eliminar usuario
+        // Eliminar usuario
         $user->delete();
 
         return response()->json(['message' => 'Usuario eliminado'], 200);

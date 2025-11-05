@@ -13,7 +13,7 @@ return new class extends Migration
 {
     Schema::create('ventas', function (Blueprint $table) {
         $table->id();
-        $table->string('tipo'); // mantenimiento o repuesto
+        $table->string('tipo'); 
         $table->string('descripcion');
         $table->decimal('precio', 10, 2);
         $table->timestamps();

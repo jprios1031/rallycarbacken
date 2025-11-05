@@ -7,14 +7,14 @@ use App\Models\Venta;
 
 class VentasController extends Controller
 {
-    // 📄 Mostrar todas las ventas
+    // Mostrar todas las ventas
     public function index()
     {
         $ventas = Venta::all();
         return response()->json($ventas, 200);
     }
 
-    // 🧾 Registrar una nueva venta
+    // Registrar una nueva venta
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -43,7 +43,7 @@ class VentasController extends Controller
 }
 
 
-    // ✏️ Actualizar una venta existente
+    //  Actualizar una venta existente
     public function update(Request $request, $id)
     {
         $venta = Venta::find($id);
@@ -67,7 +67,7 @@ class VentasController extends Controller
         ], 200);
     }
 
-    // 🗑️ Eliminar una venta
+    //Eliminar una venta
     public function destroy($id)
     {
         $venta = Venta::find($id);

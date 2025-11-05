@@ -15,7 +15,7 @@ return new class extends Migration
     Schema::create('imagenes', function (Blueprint $table) {
     $table->id();
     $table->unsignedBigInteger('novedad_id');
-    $table->string('ruta'); // Ruta de la imagen en storage
+    $table->string('ruta'); 
     $table->timestamps();
 
     $table->foreign('novedad_id')->references('id')->on('novedades')->onDelete('cascade');

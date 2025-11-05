@@ -12,7 +12,7 @@ class RolesController extends Controller
 
 
 
-    // 📄 Mostrar todas las ventas
+    // Mostrar todas las ventas
     public function index()
     {
         $roles = Role::all();
@@ -47,7 +47,7 @@ class RolesController extends Controller
 }
 
 
-    // ✏️ Actualizar una venta existente
+    // Actualizar una venta existente
     public function update(Request $request, $id)
     {
         $roles = Role::find($id);
@@ -70,7 +70,7 @@ class RolesController extends Controller
         ], 200);
     }
 
-    // 🗑️ Eliminar una venta
+    //  Eliminar una venta
     public function destroy($id)
     {
         $roles = Role::find($id);
