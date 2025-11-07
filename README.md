@@ -53,8 +53,17 @@ cp .env.example .env
 php artisan key:generate
 php artisan migrate
 php artisan serve  --port=8000
+Cuando se instala el sistema por primera vez y se crea un usuario desde el register admin se debe editar (por ejemplo, el primero en la tabla users) con rol_id 1 ya que
+Ese usuario:
+
+Se crea con rol cliente por defecto.
+
+Pero debe poder ser editado en la tabla users en la db para convertirlo en administrador (rol_id 1).
+
+Una vez editado, podrá crear o heredar nuevos usuarios con rol admin o cliente desde la interfaz.
 
 Conexión con el Frontend
 
 El frontend (rallycarfronted) consume los endpoints de esta API mediante Laravel HTTP Client.
 Asegúrate de mantener ambos servidores activos (API y Frontend) al momento de realizar pruebas
+
