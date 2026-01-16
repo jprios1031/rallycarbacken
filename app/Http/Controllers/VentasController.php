@@ -17,6 +17,7 @@ class VentasController extends Controller
         $query->where(function ($q) use ($search) {
             $q->where('tipo', 'like', '%' . $search . '%')
               ->orWhere('descripcion', 'like', '%' . $search . '%')
+              ->orWhere('cantidad', 'like', '%' . $search . '%')
               ->orWhere('precio', 'like', '%' . $search . '%');
         });
     }
@@ -30,6 +31,7 @@ class VentasController extends Controller
         $validated = $request->validate([
             'tipo' => 'required|string',
             'descripcion' => 'required|string',
+            'cantidad' =>  'required|integer',
             'precio' => 'required|numeric|min:0',
            
         ]);
@@ -65,6 +67,7 @@ class VentasController extends Controller
         $validated = $request->validate([
             'tipo' => 'required|string',
             'descripcion' => 'required|string',
+            'cantidad' =>  'required|integer',
             'precio' => 'required|numeric|min:0',
          
         ]);

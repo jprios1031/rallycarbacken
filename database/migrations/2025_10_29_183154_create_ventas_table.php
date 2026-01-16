@@ -15,7 +15,9 @@ return new class extends Migration
         $table->id();
         $table->string('tipo'); 
         $table->string('descripcion');
+        $table->integer('cantidad');
         $table->decimal('precio', 10, 2);
+
         $table->timestamps();
     });
 }

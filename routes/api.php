@@ -10,6 +10,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\VentasController;
 use App\Http\Controllers\Api\AuthClienteController;
+use App\Http\Controllers\generarPdfController;
+
 use Illuminate\Http\Request;
 
 //  Rutas públicas (sin autenticación)
@@ -31,7 +33,10 @@ Route::middleware(['auth:sanctum'])->group(function ()  {
     Route::apiResource('novedades', NovedadController::class);
     Route::apiResource('users', UserController::class);
     Route::apiResource('ventas', VentasController::class);
+    Route::post('/generar-pdf/{id}', [GenerarPdfController::class, 'generarFactura']);
     Route::apiResource('gastos', GastosController::class);
+    
+
 
  });
 
