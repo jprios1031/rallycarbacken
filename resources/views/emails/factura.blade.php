@@ -161,7 +161,7 @@
             <td width="60%">
                 <!-- SECCIÓN LOGO -->
                 <div class="logo-box">
-                   <img src="{{ public_path('storage/logo.png') }}" alt="Logo">
+                   <img src="{{ public_path('storage/logo1.png') }}" alt="Logo">
 
 
                 </div>
@@ -173,7 +173,6 @@
                     Tel: 321 623 4420<br>
                     rallycarspereira@gmail.com
                 </div>
->>>>>>> 00fd548bec38bfbf9c4ce641da5894fb74364491
             </td>
 
             <td width="40%" class="factura-info">
