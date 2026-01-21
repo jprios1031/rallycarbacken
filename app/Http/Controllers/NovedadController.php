@@ -30,11 +30,7 @@ class NovedadController extends Controller
      */
     public function store(Request $request)
     {
-        \Log::error('NOVEDAD REQUEST', [
-        'all' => $request->all(),
-        'files' => $request->files->all(),
-        'content_type' => $request->header('Content-Type'),
-    ]);
+        
 
         $request->validate([
             'titulo' => 'required|string|max:255',
