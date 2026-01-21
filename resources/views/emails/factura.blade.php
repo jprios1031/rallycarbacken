@@ -95,7 +95,7 @@
         <tr>
             <td>
                 {{-- Logo --}}
-                {{-- <img src="{{ public_path('imagenes/logo.png') }}" class="logo"> --}}
+                {{-- <img src="{{ public_path('imagenes/logo1.png') }}" class="logo"> --}}
                 <strong>MI EMPRESA S.A.S</strong><br>
                 NIT: 900.000.000-1<br>
                 Dirección:cra 4 N 34-29 brr Cañarte, Pereira, Risaralda<br>
