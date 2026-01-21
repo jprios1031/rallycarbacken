@@ -45,19 +45,19 @@ class NovedadController extends Controller
             'vehiculo_id' => $request->vehiculo_id,
         ]);
 
-       //  // Guardar imágenes
-       //  if ($request->hasFile('imagenes')) {
-       //      foreach ($request->file('imagenes') as $file) {
-       //          $path = $file->store('imagenes_novedades', 'public');
+        // Guardar imágenes
+        if ($request->hasFile('imagenes')) {
+            foreach ($request->file('imagenes') as $file) {
+                $path = $file->store('imagenes_novedades', 'public');
 
-       //          Imagenes::create([
-       //              'ruta' => $path,
-       //              'novedad_id' => $novedad->id,
-       //          ]);
-       //      }
-       //  }
+                Imagenes::create([
+                    'ruta' => $path,
+                    'novedad_id' => $novedad->id,
+                ]);
+            }
+        }
 
-       // $novedad->load('imagenes', 'vehiculo');
+       $novedad->load('imagenes', 'vehiculo');
 
         return response()->json([
             'message' => 'Novedad creada correctamente',
