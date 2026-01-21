@@ -21,7 +21,7 @@ class NovedadController extends Controller
         $query->where('titulo', 'like', '%' . $search . '%');
     }
 
-    $novedades = $query->get();
+    $novedades = $query->paguinate(5);
 
     return response()->json($novedades);
 }
