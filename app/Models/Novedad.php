@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Imagenes;
+use App\Models\imagenes;
 use App\Models\Vehiculo;
 
 class Novedad extends Model
@@ -23,6 +23,6 @@ class Novedad extends Model
 
     public function imagenes()
     {
-        return $this->hasMany(Imagenes::class);
+        return $this->hasMany(imagenes::class);
     }
 }
