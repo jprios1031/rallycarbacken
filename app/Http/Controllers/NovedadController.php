@@ -28,47 +28,61 @@ class NovedadController extends Controller
     /**
      * Crear una novedad
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'titulo' => 'required|string|max:255',
-            'descripcion' => 'required|string|max:1000',
-            'vehiculo_id' => 'required|exists:vehiculos,id',
-            'imagenes.*' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
-        ]);
+  public function store(Request $request)
+{
+    // Validación de los datos
+    $request->validate([
+        'titulo' => 'required|string|max:255',
+        'descripcion' => 'required|string|max:1000',
+        'vehiculo_id' => 'required|integer',
+        'imagenes.*' => 'nullable|image|mimes:jpg,jpeg,png|max:10240', // máximo 10MB por imagen
+    ]);
 
-        $novedad = Novedad::create([
-            'titulo' => $request->titulo,
-            'descripcion' => $request->descripcion,
-            'vehiculo_id' => $request->vehiculo_id,
-        ]);
+    $token = Session::get('token');
 
-        // Guardar imágenes
-        if ($request->hasFile('imagenes')) {
-            foreach ($request->file('imagenes') as $file) {
-                $path = $file->store('imagenes_novedades', 'public');
+    // Preparar la petición HTTP con token
+    $httpRequest = Http::withToken($token);
 
-                Imagenes::create([
-                    'ruta' => $path,
-                    'novedad_id' => $novedad->id,
-                ]);
-            }
+    // Adjuntar imágenes si existen
+    if ($request->hasFile('imagenes')) {
+        foreach ($request->file('imagenes') as $index => $file) {
+            $httpRequest = $httpRequest->attach(
+                "imagenes[$index]", // nombre del campo con índice
+                file_get_contents($file->getRealPath()), 
+                $file->getClientOriginalName()
+            );
         }
+    }
 
-       $novedad->load('imagenes', 'vehiculo');
+    // Adjuntar los campos normales como multipart
+    $httpRequest = $httpRequest->asMultipart([
+        [
+            'name' => 'titulo',
+            'contents' => $request->titulo
+        ],
+        [
+            'name' => 'descripcion',
+            'contents' => $request->descripcion
+        ],
+        [
+            'name' => 'vehiculo_id',
+            'contents' => $request->vehiculo_id
+        ],
+    ]);
 
-        return response()->json([
-            'message' => 'Novedad creada correctamente',
-            'data' => $novedad,
-        ], 201);
-     
-    } 
-            
-        
+    // Enviar la petición POST al backend
+    $response = $httpRequest->post('https://rallycarbacken-production.up.railway.app/api/novedades');
 
-    /**
-     * Mostrar detalle
-     */
+    // Manejo de la respuesta
+    if ($response->successful()) {
+        return redirect()->route('novedad.index')
+                         ->with('success', 'Novedad creada exitosamente.');
+    }
+
+    // Si falla, mostrar el error del backend
+    return back()->with('error', 'Error al registrar la novedad: ' . $response->body());
+}
+
     public function show($id)
     {
         $novedad = Novedad::with(['vehiculo', 'imagenes'])->find($id);
