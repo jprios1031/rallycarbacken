@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Novedad;
-use App\Models\Imagenes;
+use App\Models\imagenes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -50,7 +50,7 @@ class NovedadController extends Controller
             foreach ($request->file('imagenes') as $file) {
                 $path = $file->store('imagenes_novedades', 'public');
 
-                Imagenes::create([
+                imagenes::create([
                     'ruta' => $path,
                     'novedad_id' => $novedad->id,
                 ]);
