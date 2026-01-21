@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\imagenes;
-use App\Models\vehiculo;
-
+use App\Models\Imagenes;
+use App\Models\Vehiculo;
 
 class Novedad extends Model
 {
@@ -14,7 +13,7 @@ class Novedad extends Model
     protected $fillable = [
         'titulo',
         'descripcion',
-        'vehiculo_id', 
+        'vehiculo_id',
     ];
 
     public function vehiculo()
